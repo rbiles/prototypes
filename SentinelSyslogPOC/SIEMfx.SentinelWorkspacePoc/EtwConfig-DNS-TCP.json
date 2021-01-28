@@ -1,0 +1,16 @@
+﻿[
+  {
+    "SessionName": "DNS",
+    "ProviderName": "Microsoft-Windows-DNS-Client",
+    "ProviderId": "1C95126E-7EEA-49A9-A3FE-A378B03DDB4D",
+    "ObservableName": "Kql_DNSSummary",
+    "KqlQuery": "EtwDns | where Provider == 'Microsoft-Windows-DNS-Client' | extend ProcessName = getprocessname(ProcessId) | extend QueryName = EventData.QueryName, QueryResults = EventData.Address | summarize Count = count() by EventId, ProcessId, ProcessName, QueryName, QueryResults, bin(TimeCreated, 1m)"
+  },
+  {
+    "SessionName": "TCP",
+    "ProviderName": "Microsoft-Windows-Kernel-Network",
+    "ProviderId": "7dd42a49-5329-4832-8dfd-43d979153a88",
+    "ObservableName": "Kql_TCPSummary",
+    "KqlQuery": "EtwTcp | where Provider == 'Microsoft-Windows-Kernel-Network' | where EventId in (10, 11) | extend ProcessName = getprocessname(EventData.PID)| extend SourceIpAddress = EventData.saddr, SourcePort = ntohs(EventData.sport) | extend DestinationIpAddress = EventData.daddr, DestinationPort = ntohs(EventData.dport) | extend Size = EventData.size | extend ProcessId = EventData.PID | summarize Count = count(), Bytes = sum(Size) by SourceIpAddress, SourcePort, DestinationIpAddress, DestinationPort, EventId, ProcessId, ProcessName, bin(TimeCreated, 1m)"
+  }
+]

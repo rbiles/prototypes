@@ -1,0 +1,24 @@
+[
+  {
+    "TimeGenerated": "2019-11-05T20:01:33.9146661Z",
+    "ManagementGroupName": "AOI-27a34970-d402-4e07-b278-4b511d27f160",
+    "SourceSystem": "OpsManager",
+    "Computer": "BensMachine",
+    "EventID": 10,
+    "Description": "Assign",
+    "IPAddress": "10.248.74.21",
+    "HostName": "BensMachine.contoso.com",
+    "MACAddress": "0015B4257AD0"
+  },
+  {
+    "TimeGenerated": "2019-11-05T20:01:33.9146661Z",
+    "ManagementGroupName": "AOI-27a34970-d402-4e07-b278-4b511d27f160",
+    "SourceSystem": "OpsManager",
+    "Computer": "RussellsMachine.contoso.com",
+    "EventID": 11,
+    "Description": "Renew",
+    "IPAddress": "10.248.70.59",
+    "HostName": "RussellsMachine.contoso.com",
+    "MACAddress": "FC15B4257AD0"
+  }
+]

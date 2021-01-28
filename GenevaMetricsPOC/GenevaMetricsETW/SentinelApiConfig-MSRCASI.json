@@ -1,0 +1,11 @@
+﻿{
+  "AgentGuid": "d0bd5ba9-c7b6-44f0-8e3d-9bfb595038c7",
+  "WorkspaceId": "27a34970-d402-4e07-b278-4b511d27f160",
+  "OdsEndpointUri": "ods.int2.microsoftatlanta-int.com",
+  "CertificateThumbprint": "e03dd1b1f31f68d3b3fd4bbb2f43480d2aaba592",
+  "ManagementGroupId": "00000000-0000-0000-0000-000000000001",
+  "UseMmaCertificate": "false",
+  "UploadBatchSize": "100",
+  "DataType": "DHCP_ACTIVITY_BLOB",
+  "IPName": "Security"
+}

@@ -1,0 +1,20 @@
+// QueryTemplate:SyslogTrickleOfData
+declare query_parameters();
+
+cluster('cdoc.kusto.windows.net').database('Network').SyslogV2
+| where ingestion_time() > ago(1m)
+| where LogFileLineage.PayloadType == "Rfc5424"
+//| where AppName == "RT_FLOW"
+//| where MsgId == "RT_FLOW_SESSION_CREATE"
+| project Timestamp = now(),
+EventTime = DeviceTimestamp,
+Host = HostName,
+HostIP = SourceIpAddress,
+ident = "CEF",
+Facility = Facility,
+Severity = Severity,
+AppName,
+MsgId,
+ExtractedData
+| sort by EventTime desc
+| take 100

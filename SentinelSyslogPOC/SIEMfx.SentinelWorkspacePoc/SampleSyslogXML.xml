@@ -1,0 +1,21 @@
+﻿<DataItems IPName="LogManagement" ManagementGroupId="00000000-0000-0000-0000-000000000002"
+           HealthServiceSourceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7" DataType="LINUX_SYSLOGS_BLOB">
+  <DataItem type="System.Event.LinkedData" time="2020-12-10T15:32:17.490680Z"
+            sourceHealthServiceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7">
+    <TenantId>5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7</TenantId>
+    <SourceSystem>Linux</SourceSystem>
+    <TimeGenerated>2020-12-10T15:32:17.490680Z</TimeGenerated>
+    <MG>00000000-0000-0000-0000-000000000002</MG>
+    <TimeCollected>2020-12-10T15:32:17.490680Z</TimeCollected>
+    <ManagementGroupName>AOI-5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7</ManagementGroupName>
+    <Computer>RussellHPDev</Computer>
+    <EventTime>2020-12-10T15:32:17.490680Z</EventTime>
+    <Facility>daemon</Facility>
+    <HostName>12.23.34.45</HostName>
+    <SeverityLevel>info</SeverityLevel>
+    <SyslogMessage>SyslogMessage</SyslogMessage>
+    <ProcessID>1234</ProcessID>
+    <HostIP>12.23.34.45</HostIP>
+    <ProcessName>OneTwoThreeFour</ProcessName>
+  </DataItem>
+</DataItems>

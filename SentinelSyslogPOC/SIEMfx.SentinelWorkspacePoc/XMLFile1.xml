@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DataItems IPName="Security" ManagementGroupId="00000000-0000-0000-0000-000000000001"
+           HealthServiceSourceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7" DataType="SECURITY_WEF_EVENT_BLOB">
+  <DataItem type="System.Event.LinkedData" time="2020-10-10T15:32:17.490680Z"
+            sourceHealthServiceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7">
+    <EventOriginId>{7C384BE3-8EBD-4B86-A392-357AA34750C5}</EventOriginId><PublisherId>54849625-5478-4994-a5ba-3e3b0328c30d</PublisherId><PublisherName>Microsoft-Windows-Security-Auditing</PublisherName><EventSourceName>Microsoft-Windows-Security-Auditing</EventSourceName><Channel>Security</Channel><LoggingComputer>CO2PHXVDC17.phx.gbl</LoggingComputer><EventNumber>4624</EventNumber><EventCategory>12544</EventCategory><EventLevel>0</EventLevel><UserName>N/A</UserName><RawDescription/><LCID>1033</LCID><CollectDescription>True</CollectDescription><EventData>
+      <DataItem type="System.XmlData" time="2020-10-10T15:32:17.490680Z"
+                sourceHealthServiceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7">
+        <EventData xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+          <Data Name="SubjectUserSid">S-1-0-0</Data>
+          <Data Name="SubjectUserName">-</Data>
+          <Data Name="SubjectDomainName">-</Data>
+          <Data Name="SubjectLogonId">0x0</Data>
+          <Data Name="TargetUserSid">S-1-5-21-606747145-1563985344-839522115-87670118</Data>
+          <Data Name="TargetUserName">MW1SCH101081924$</Data>
+          <Data Name="TargetDomainName">PHX</Data>
+          <Data Name="TargetLogonId">0x11b7622c1</Data>
+          <Data Name="LogonType">3</Data>
+          <Data Name="LogonProcessName">Kerberos</Data>
+          <Data Name="AuthenticationPackageName">Kerberos</Data>
+          <Data Name="WorkstationName">-</Data>
+          <Data Name="LogonGuid">{35B52841-A094-9BA0-8867-8ED0B38FBA80}</Data>
+          <Data Name="TransmittedServices">-</Data>
+          <Data Name="LmPackageName">-</Data>
+          <Data Name="KeyLength">0</Data>
+          <Data Name="ProcessId">0x0</Data>
+          <Data Name="ProcessName">-</Data>
+          <Data Name="IpAddress">25.124.241.156</Data>
+          <Data Name="IpPort">41255</Data>
+          <Data Name="ImpersonationLevel">%%1833</Data>
+          <Data Name="TimeCreated">2020-05-06T17:36:39.2608538-07:00</Data>
+          <Data Name="EventRecordId">32442270256</Data>
+        </EventData>
+      </DataItem>
+    </EventData><EventDisplayNumber>4624</EventDisplayNumber><ManagedEntityId>{D056ADDA-9675-7690-CC92-41AA6B90CC05}</ManagedEntityId><RuleId>{1F68E37D-EC73-9BD3-92D5-C236C995FA0A}</RuleId><EventDescription/>
+  </DataItem><DataItem type="System.Event.LinkedData" time="2020-10-10T15:32:17.529676Z"
+                       sourceHealthServiceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7">
+    <EventOriginId>{7C384BE3-8EBD-4B86-A392-357AA34750C5}</EventOriginId><PublisherId>54849625-5478-4994-a5ba-3e3b0328c30d</PublisherId><PublisherName>Microsoft-Windows-Security-Auditing</PublisherName><EventSourceName>Microsoft-Windows-Security-Auditing</EventSourceName><Channel>Security</Channel><LoggingComputer>CO2PHXVDC17.phx.gbl</LoggingComputer><EventNumber>4624</EventNumber><EventCategory>12544</EventCategory><EventLevel>0</EventLevel><UserName>N/A</UserName><RawDescription/><LCID>1033</LCID><CollectDescription>True</CollectDescription><EventData>
+      <DataItem type="System.XmlData" time="2020-10-10T15:32:17.529676Z"
+                sourceHealthServiceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7">
+        <EventData xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+          <Data Name="SubjectUserSid">S-1-0-0</Data>
+          <Data Name="SubjectUserName">-</Data>
+          <Data Name="SubjectDomainName">-</Data>
+          <Data Name="SubjectLogonId">0x0</Data>
+          <Data Name="TargetUserSid">S-1-5-21-606747145-1563985344-839522115-87655751</Data>
+          <Data Name="TargetUserName">CO4AAPD90996891$</Data>
+          <Data Name="TargetDomainName">PHX</Data>
+          <Data Name="TargetLogonId">0x11b7622de</Data>
+          <Data Name="LogonType">3</Data>
+          <Data Name="LogonProcessName">Kerberos</Data>
+          <Data Name="AuthenticationPackageName">Kerberos</Data>
+          <Data Name="WorkstationName">-</Data>
+          <Data Name="LogonGuid">{2A8C7AC1-C29B-7784-F62E-30CADE3D60A9}</Data>
+          <Data Name="TransmittedServices">-</Data>
+          <Data Name="LmPackageName">-</Data>
+          <Data Name="KeyLength">0</Data>
+          <Data Name="ProcessId">0x0</Data>
+          <Data Name="ProcessName">-</Data>
+          <Data Name="IpAddress">25.123.147.231</Data>
+          <Data Name="IpPort">44174</Data>
+          <Data Name="ImpersonationLevel">%%1833</Data>
+          <Data Name="TimeCreated">2020-05-06T17:36:39.2608538-07:00</Data>
+          <Data Name="EventRecordId">32442270259</Data>
+        </EventData>
+      </DataItem>
+    </EventData><EventDisplayNumber>4624</EventDisplayNumber><ManagedEntityId>{D056ADDA-9675-7690-CC92-41AA6B90CC05}</ManagedEntityId><RuleId>{1F68E37D-EC73-9BD3-92D5-C236C995FA0A}</RuleId><EventDescription/>
+  </DataItem><DataItem type="System.Event.LinkedData" time="2020-10-10T15:32:17.529676Z"
+                       sourceHealthServiceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7">
+    <EventOriginId>{7C384BE3-8EBD-4B86-A392-357AA34750C5}</EventOriginId><PublisherId>54849625-5478-4994-a5ba-3e3b0328c30d</PublisherId><PublisherName>Microsoft-Windows-Security-Auditing</PublisherName><EventSourceName>Microsoft-Windows-Security-Auditing</EventSourceName><Channel>Security</Channel><LoggingComputer>CO2PHXVDC17.phx.gbl</LoggingComputer><EventNumber>4624</EventNumber><EventCategory>12544</EventCategory><EventLevel>0</EventLevel><UserName>N/A</UserName><RawDescription/><LCID>1033</LCID><CollectDescription>True</CollectDescription><EventData>
+      <DataItem type="System.XmlData" time="2020-10-10T15:32:17.529676Z"
+                sourceHealthServiceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7">
+        <EventData xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+          <Data Name="SubjectUserSid">S-1-0-0</Data>
+          <Data Name="SubjectUserName">-</Data>
+          <Data Name="SubjectDomainName">-</Data>
+          <Data Name="SubjectLogonId">0x0</Data>
+          <Data Name="TargetUserSid">S-1-5-21-606747145-1563985344-839522115-87655751</Data>
+          <Data Name="TargetUserName">CO4AAPD90996891$</Data>
+          <Data Name="TargetDomainName">PHX</Data>
+          <Data Name="TargetLogonId">0x11b76233a</Data>
+          <Data Name="LogonType">3</Data>
+          <Data Name="LogonProcessName">Kerberos</Data>
+          <Data Name="AuthenticationPackageName">Kerberos</Data>
+          <Data Name="WorkstationName">-</Data>
+          <Data Name="LogonGuid">{2A8C7AC1-C29B-7784-F62E-30CADE3D60A9}</Data>
+          <Data Name="TransmittedServices">-</Data>
+          <Data Name="LmPackageName">-</Data>
+          <Data Name="KeyLength">0</Data>
+          <Data Name="ProcessId">0x0</Data>
+          <Data Name="ProcessName">-</Data>
+          <Data Name="IpAddress">25.123.147.231</Data>
+          <Data Name="IpPort">44179</Data>
+          <Data Name="ImpersonationLevel">%%1833</Data>
+          <Data Name="TimeCreated">2020-05-06T17:36:39.3234023-07:00</Data>
+          <Data Name="EventRecordId">32442270262</Data>
+        </EventData>
+      </DataItem>
+    </EventData><EventDisplayNumber>4624</EventDisplayNumber><ManagedEntityId>{D056ADDA-9675-7690-CC92-41AA6B90CC05}</ManagedEntityId><RuleId>{1F68E37D-EC73-9BD3-92D5-C236C995FA0A}</RuleId><EventDescription/>
+  </DataItem><DataItem type="System.Event.LinkedData" time="2020-10-10T15:32:17.529676Z"
+                       sourceHealthServiceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7">
+    <EventOriginId>{7C384BE3-8EBD-4B86-A392-357AA34750C5}</EventOriginId><PublisherId>54849625-5478-4994-a5ba-3e3b0328c30d</PublisherId><PublisherName>Microsoft-Windows-Security-Auditing</PublisherName><EventSourceName>Microsoft-Windows-Security-Auditing</EventSourceName><Channel>Security</Channel><LoggingComputer>CO2PHXVDC17.phx.gbl</LoggingComputer><EventNumber>4624</EventNumber><EventCategory>12544</EventCategory><EventLevel>0</EventLevel><UserName>N/A</UserName><RawDescription/><LCID>1033</LCID><CollectDescription>True</CollectDescription><EventData>
+      <DataItem type="System.XmlData" time="2020-10-10T15:32:17.529676Z"
+                sourceHealthServiceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7">
+        <EventData xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+          <Data Name="SubjectUserSid">S-1-0-0</Data>
+          <Data Name="SubjectUserName">-</Data>
+          <Data Name="SubjectDomainName">-</Data>
+          <Data Name="SubjectLogonId">0x0</Data>
+          <Data Name="TargetUserSid">S-1-5-21-606747145-1563985344-839522115-87472801</Data>
+          <Data Name="TargetUserName">CH01APF7C20E226$</Data>
+          <Data Name="TargetDomainName">PHX</Data>
+          <Data Name="TargetLogonId">0x11b762355</Data>
+          <Data Name="LogonType">3</Data>
+          <Data Name="LogonProcessName">Kerberos</Data>
+          <Data Name="AuthenticationPackageName">Kerberos</Data>
+          <Data Name="WorkstationName">-</Data>
+          <Data Name="LogonGuid">{BE9B723A-3B83-87A9-E228-845F630D28F2}</Data>
+          <Data Name="TransmittedServices">-</Data>
+          <Data Name="LmPackageName">-</Data>
+          <Data Name="KeyLength">0</Data>
+          <Data Name="ProcessId">0x0</Data>
+          <Data Name="ProcessName">-</Data>
+          <Data Name="IpAddress">10.153.162.127</Data>
+          <Data Name="IpPort">10517</Data>
+          <Data Name="ImpersonationLevel">%%1833</Data>
+          <Data Name="TimeCreated">2020-05-06T17:36:39.3234023-07:00</Data>
+          <Data Name="EventRecordId">32442270264</Data>
+        </EventData>
+      </DataItem>
+    </EventData><EventDisplayNumber>4624</EventDisplayNumber><ManagedEntityId>{D056ADDA-9675-7690-CC92-41AA6B90CC05}</ManagedEntityId><RuleId>{1F68E37D-EC73-9BD3-92D5-C236C995FA0A}</RuleId><EventDescription/>
+  </DataItem><DataItem type="System.Event.LinkedData" time="2020-10-10T15:32:17.529676Z"
+                       sourceHealthServiceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7">
+    <EventOriginId>{7C384BE3-8EBD-4B86-A392-357AA34750C5}</EventOriginId><PublisherId>54849625-5478-4994-a5ba-3e3b0328c30d</PublisherId><PublisherName>Microsoft-Windows-Security-Auditing</PublisherName><EventSourceName>Microsoft-Windows-Security-Auditing</EventSourceName><Channel>Security</Channel><LoggingComputer>CO2PHXVDC17.phx.gbl</LoggingComputer><EventNumber>4776</EventNumber><EventCategory>14336</EventCategory><EventLevel>0</EventLevel><UserName>N/A</UserName><RawDescription/><LCID>1033</LCID><CollectDescription>True</CollectDescription><EventData>
+      <DataItem type="System.XmlData" time="2020-10-10T15:32:17.529676Z"
+                sourceHealthServiceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7">
+        <EventData xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+          <Data Name="PackageName">MICROSOFT_AUTHENTICATION_PACKAGE_V1_0</Data>
+          <Data Name="TargetUserName">CO4SCH020010708$</Data>
+          <Data Name="Workstation">CO4SCH020010708</Data>
+          <Data Name="Status">0x0</Data>
+          <Data Name="TimeCreated">2020-05-06T17:36:39.3234023-07:00</Data>
+          <Data Name="EventRecordId">32442270265</Data>
+        </EventData>
+      </DataItem>
+    </EventData><EventDisplayNumber>4776</EventDisplayNumber><ManagedEntityId>{D056ADDA-9675-7690-CC92-41AA6B90CC05}</ManagedEntityId><RuleId>{1F68E37D-EC73-9BD3-92D5-C236C995FA0A}</RuleId><EventDescription/>
+  </DataItem><DataItem type="System.Event.LinkedData" time="2020-10-10T15:32:17.529676Z"
+                       sourceHealthServiceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7">
+    <EventOriginId>{7C384BE3-8EBD-4B86-A392-357AA34750C5}</EventOriginId><PublisherId>54849625-5478-4994-a5ba-3e3b0328c30d</PublisherId><PublisherName>Microsoft-Windows-Security-Auditing</PublisherName><EventSourceName>Microsoft-Windows-Security-Auditing</EventSourceName><Channel>Security</Channel><LoggingComputer>CO2PHXVDC17.phx.gbl</LoggingComputer><EventNumber>4624</EventNumber><EventCategory>12544</EventCategory><EventLevel>0</EventLevel><UserName>N/A</UserName><RawDescription/><LCID>1033</LCID><CollectDescription>True</CollectDescription><EventData>
+      <DataItem type="System.XmlData" time="2020-10-10T15:32:17.529676Z"
+                sourceHealthServiceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7">
+        <EventData xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+          <Data Name="SubjectUserSid">S-1-0-0</Data>
+          <Data Name="SubjectUserName">-</Data>
+          <Data Name="SubjectDomainName">-</Data>
+          <Data Name="SubjectLogonId">0x0</Data>
+          <Data Name="TargetUserSid">S-1-5-21-606747145-1563985344-839522115-87527062</Data>
+          <Data Name="TargetUserName">CO4PHY010110625$</Data>
+          <Data Name="TargetDomainName">PHX</Data>
+          <Data Name="TargetLogonId">0x11b76236a</Data>
+          <Data Name="LogonType">3</Data>
+          <Data Name="LogonProcessName">Kerberos</Data>
+          <Data Name="AuthenticationPackageName">Kerberos</Data>
+          <Data Name="WorkstationName">-</Data>
+          <Data Name="LogonGuid">{F32AEC58-ABED-5C5D-4D04-2FA2D4453140}</Data>
+          <Data Name="TransmittedServices">-</Data>
+          <Data Name="LmPackageName">-</Data>
+          <Data Name="KeyLength">0</Data>
+          <Data Name="ProcessId">0x0</Data>
+          <Data Name="ProcessName">-</Data>
+          <Data Name="IpAddress">100.101.41.93</Data>
+          <Data Name="IpPort">25274</Data>
+          <Data Name="ImpersonationLevel">%%1833</Data>
+          <Data Name="TimeCreated">2020-05-06T17:36:39.3389834-07:00</Data>
+          <Data Name="EventRecordId">32442270267</Data>
+        </EventData>
+      </DataItem>
+    </EventData><EventDisplayNumber>4624</EventDisplayNumber><ManagedEntityId>{D056ADDA-9675-7690-CC92-41AA6B90CC05}</ManagedEntityId><RuleId>{1F68E37D-EC73-9BD3-92D5-C236C995FA0A}</RuleId><EventDescription/>
+  </DataItem><DataItem type="System.Event.LinkedData" time="2020-10-10T15:32:17.529676Z"
+                       sourceHealthServiceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7">
+    <EventOriginId>{7C384BE3-8EBD-4B86-A392-357AA34750C5}</EventOriginId><PublisherId>54849625-5478-4994-a5ba-3e3b0328c30d</PublisherId><PublisherName>Microsoft-Windows-Security-Auditing</PublisherName><EventSourceName>Microsoft-Windows-Security-Auditing</EventSourceName><Channel>Security</Channel><LoggingComputer>CO2PHXVDC17.phx.gbl</LoggingComputer><EventNumber>4624</EventNumber><EventCategory>12544</EventCategory><EventLevel>0</EventLevel><UserName>N/A</UserName><RawDescription/><LCID>1033</LCID><CollectDescription>True</CollectDescription><EventData>
+      <DataItem type="System.XmlData" time="2020-10-10T15:32:17.529676Z"
+                sourceHealthServiceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7">
+        <EventData xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+          <Data Name="SubjectUserSid">S-1-0-0</Data>
+          <Data Name="SubjectUserName">-</Data>
+          <Data Name="SubjectDomainName">-</Data>
+          <Data Name="SubjectLogonId">0x0</Data>
+          <Data Name="TargetUserSid">S-1-5-21-606747145-1563985344-839522115-87655751</Data>
+          <Data Name="TargetUserName">CO4AAPD90996891$</Data>
+          <Data Name="TargetDomainName">PHX</Data>
+          <Data Name="TargetLogonId">0x11b762379</Data>
+          <Data Name="LogonType">3</Data>
+          <Data Name="LogonProcessName">Kerberos</Data>
+          <Data Name="AuthenticationPackageName">Kerberos</Data>
+          <Data Name="WorkstationName">-</Data>
+          <Data Name="LogonGuid">{2A8C7AC1-C29B-7784-F62E-30CADE3D60A9}</Data>
+          <Data Name="TransmittedServices">-</Data>
+          <Data Name="LmPackageName">-</Data>
+          <Data Name="KeyLength">0</Data>
+          <Data Name="ProcessId">0x0</Data>
+          <Data Name="ProcessName">-</Data>
+          <Data Name="IpAddress">25.123.147.231</Data>
+          <Data Name="IpPort">44180</Data>
+          <Data Name="ImpersonationLevel">%%1833</Data>
+          <Data Name="TimeCreated">2020-05-06T17:36:39.3389834-07:00</Data>
+          <Data Name="EventRecordId">32442270268</Data>
+        </EventData>
+      </DataItem>
+    </EventData><EventDisplayNumber>4624</EventDisplayNumber><ManagedEntityId>{D056ADDA-9675-7690-CC92-41AA6B90CC05}</ManagedEntityId><RuleId>{1F68E37D-EC73-9BD3-92D5-C236C995FA0A}</RuleId><EventDescription/>
+  </DataItem><DataItem type="System.Event.LinkedData" time="2020-10-10T15:32:17.529676Z"
+                       sourceHealthServiceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7">
+    <EventOriginId>{7C384BE3-8EBD-4B86-A392-357AA34750C5}</EventOriginId><PublisherId>54849625-5478-4994-a5ba-3e3b0328c30d</PublisherId><PublisherName>Microsoft-Windows-Security-Auditing</PublisherName><EventSourceName>Microsoft-Windows-Security-Auditing</EventSourceName><Channel>Security</Channel><LoggingComputer>CO2PHXVDC17.phx.gbl</LoggingComputer><EventNumber>4624</EventNumber><EventCategory>12544</EventCategory><EventLevel>0</EventLevel><UserName>N/A</UserName><RawDescription/><LCID>1033</LCID><CollectDescription>True</CollectDescription><EventData>
+      <DataItem type="System.XmlData" time="2020-10-10T15:32:17.529676Z"
+                sourceHealthServiceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7">
+        <EventData xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+          <Data Name="SubjectUserSid">S-1-0-0</Data>
+          <Data Name="SubjectUserName">-</Data>
+          <Data Name="SubjectDomainName">-</Data>
+          <Data Name="SubjectLogonId">0x0</Data>
+          <Data Name="TargetUserSid">S-1-5-21-606747145-1563985344-839522115-86640268</Data>
+          <Data Name="TargetUserName">CO3PHY050550820$</Data>
+          <Data Name="TargetDomainName">PHX</Data>
+          <Data Name="TargetLogonId">0x11b76239a</Data>
+          <Data Name="LogonType">3</Data>
+          <Data Name="LogonProcessName">Kerberos</Data>
+          <Data Name="AuthenticationPackageName">Kerberos</Data>
+          <Data Name="WorkstationName">-</Data>
+          <Data Name="LogonGuid">{ED6E22A4-8A71-135D-F914-4C435521C1C6}</Data>
+          <Data Name="TransmittedServices">-</Data>
+          <Data Name="LmPackageName">-</Data>
+          <Data Name="KeyLength">0</Data>
+          <Data Name="ProcessId">0x0</Data>
+          <Data Name="ProcessName">-</Data>
+          <Data Name="IpAddress">10.183.172.136</Data>
+          <Data Name="IpPort">10920</Data>
+          <Data Name="ImpersonationLevel">%%1840</Data>
+          <Data Name="TimeCreated">2020-05-06T17:36:39.3389834-07:00</Data>
+          <Data Name="EventRecordId">32442270270</Data>
+        </EventData>
+      </DataItem>
+    </EventData><EventDisplayNumber>4624</EventDisplayNumber><ManagedEntityId>{D056ADDA-9675-7690-CC92-41AA6B90CC05}</ManagedEntityId><RuleId>{1F68E37D-EC73-9BD3-92D5-C236C995FA0A}</RuleId><EventDescription/>
+  </DataItem><DataItem type="System.Event.LinkedData" time="2020-10-10T15:32:17.530680Z"
+                       sourceHealthServiceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7">
+    <EventOriginId>{7C384BE3-8EBD-4B86-A392-357AA34750C5}</EventOriginId><PublisherId>54849625-5478-4994-a5ba-3e3b0328c30d</PublisherId><PublisherName>Microsoft-Windows-Security-Auditing</PublisherName><EventSourceName>Microsoft-Windows-Security-Auditing</EventSourceName><Channel>Security</Channel><LoggingComputer>CO2PHXVDC17.phx.gbl</LoggingComputer><EventNumber>4624</EventNumber><EventCategory>12544</EventCategory><EventLevel>0</EventLevel><UserName>N/A</UserName><RawDescription/><LCID>1033</LCID><CollectDescription>True</CollectDescription><EventData>
+      <DataItem type="System.XmlData" time="2020-10-10T15:32:17.530680Z"
+                sourceHealthServiceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7">
+        <EventData xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+          <Data Name="SubjectUserSid">S-1-0-0</Data>
+          <Data Name="SubjectUserName">-</Data>
+          <Data Name="SubjectDomainName">-</Data>
+          <Data Name="SubjectLogonId">0x0</Data>
+          <Data Name="TargetUserSid">S-1-5-21-606747145-1563985344-839522115-86048182</Data>
+          <Data Name="TargetUserName">CO3PHY050551426$</Data>
+          <Data Name="TargetDomainName">PHX</Data>
+          <Data Name="TargetLogonId">0x11b7623a9</Data>
+          <Data Name="LogonType">3</Data>
+          <Data Name="LogonProcessName">Kerberos</Data>
+          <Data Name="AuthenticationPackageName">Kerberos</Data>
+          <Data Name="WorkstationName">-</Data>
+          <Data Name="LogonGuid">{035A448F-1119-48E9-62D8-6440A8C37D94}</Data>
+          <Data Name="TransmittedServices">-</Data>
+          <Data Name="LmPackageName">-</Data>
+          <Data Name="KeyLength">0</Data>
+          <Data Name="ProcessId">0x0</Data>
+          <Data Name="ProcessName">-</Data>
+          <Data Name="IpAddress">10.183.174.14</Data>
+          <Data Name="IpPort">34671</Data>
+          <Data Name="ImpersonationLevel">%%1833</Data>
+          <Data Name="TimeCreated">2020-05-06T17:36:39.3389834-07:00</Data>
+          <Data Name="EventRecordId">32442270272</Data>
+        </EventData>
+      </DataItem>
+    </EventData><EventDisplayNumber>4624</EventDisplayNumber><ManagedEntityId>{D056ADDA-9675-7690-CC92-41AA6B90CC05}</ManagedEntityId><RuleId>{1F68E37D-EC73-9BD3-92D5-C236C995FA0A}</RuleId><EventDescription/>
+  </DataItem><DataItem type="System.Event.LinkedData" time="2020-10-10T15:32:17.530680Z"
+                       sourceHealthServiceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7">
+    <EventOriginId>{7C384BE3-8EBD-4B86-A392-357AA34750C5}</EventOriginId><PublisherId>54849625-5478-4994-a5ba-3e3b0328c30d</PublisherId><PublisherName>Microsoft-Windows-Security-Auditing</PublisherName><EventSourceName>Microsoft-Windows-Security-Auditing</EventSourceName><Channel>Security</Channel><LoggingComputer>CO2PHXVDC17.phx.gbl</LoggingComputer><EventNumber>4776</EventNumber><EventCategory>14336</EventCategory><EventLevel>0</EventLevel><UserName>N/A</UserName><RawDescription/><LCID>1033</LCID><CollectDescription>True</CollectDescription><EventData>
+      <DataItem type="System.XmlData" time="2020-10-10T15:32:17.530680Z"
+                sourceHealthServiceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7">
+        <EventData xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+          <Data Name="PackageName">MICROSOFT_AUTHENTICATION_PACKAGE_V1_0</Data>
+          <Data Name="TargetUserName">CO4SCH020010708$</Data>
+          <Data Name="Workstation">CO4SCH020010708</Data>
+          <Data Name="Status">0x0</Data>
+          <Data Name="TimeCreated">2020-05-06T17:36:39.3546121-07:00</Data>
+          <Data Name="EventRecordId">32442270274</Data>
+        </EventData>
+      </DataItem>
+    </EventData><EventDisplayNumber>4776</EventDisplayNumber><ManagedEntityId>{D056ADDA-9675-7690-CC92-41AA6B90CC05}</ManagedEntityId><RuleId>{1F68E37D-EC73-9BD3-92D5-C236C995FA0A}</RuleId><EventDescription/>
+  </DataItem><DataItem type="System.Event.LinkedData" time="2020-10-10T15:32:17.530680Z"
+                       sourceHealthServiceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7">
+    <EventOriginId>{7C384BE3-8EBD-4B86-A392-357AA34750C5}</EventOriginId><PublisherId>54849625-5478-4994-a5ba-3e3b0328c30d</PublisherId><PublisherName>Microsoft-Windows-Security-Auditing</PublisherName><EventSourceName>Microsoft-Windows-Security-Auditing</EventSourceName><Channel>Security</Channel><LoggingComputer>CO2PHXVDC17.phx.gbl</LoggingComputer><EventNumber>4624</EventNumber><EventCategory>12544</EventCategory><EventLevel>0</EventLevel><UserName>N/A</UserName><RawDescription/><LCID>1033</LCID><CollectDescription>True</CollectDescription><EventData>
+      <DataItem type="System.XmlData" time="2020-10-10T15:32:17.530680Z"
+                sourceHealthServiceId="5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7">
+        <EventData xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+          <Data Name="SubjectUserSid">S-1-0-0</Data>
+          <Data Name="SubjectUserName">-</Data>
+          <Data Name="SubjectDomainName">-</Data>
+          <Data Name="SubjectLogonId">0x0</Data>
+          <Data Name="TargetUserSid">S-1-5-21-606747145-1563985344-839522115-86048182</Data>
+          <Data Name="TargetUserName">CO3PHY050551426$</Data>
+          <Data Name="TargetDomainName">PHX</Data>
+          <Data Name="TargetLogonId">0x11b7623cd</Data>
+          <Data Name="LogonType">3</Data>
+          <Data Name="LogonProcessName">Kerberos</Data>
+          <Data Name="AuthenticationPackageName">Kerberos</Data>
+          <Data Name="WorkstationName">-</Data>
+          <Data Name="LogonGuid">{035A448F-1119-48E9-62D8-6440A8C37D94}</Data>
+          <Data Name="TransmittedServices">-</Data>
+          <Data Name="LmPackageName">-</Data>
+          <Data Name="KeyLength">0</Data>
+          <Data Name="ProcessId">0x0</Data>
+          <Data Name="ProcessName">-</Data>
+          <Data Name="IpAddress">10.183.174.14</Data>
+          <Data Name="IpPort">34672</Data>
+          <Data Name="ImpersonationLevel">%%1833</Data>
+          <Data Name="TimeCreated">2020-05-06T17:36:39.3702347-07:00</Data>
+          <Data Name="EventRecordId">32442270276</Data>
+        </EventData>
+      </DataItem>
+    </EventData><EventDisplayNumber>4624</EventDisplayNumber><ManagedEntityId>{D056ADDA-9675-7690-CC92-41AA6B90CC05}</ManagedEntityId><RuleId>{1F68E37D-EC73-9BD3-92D5-C236C995FA0A}</RuleId><EventDescription/>
+  </DataItem>
+</DataItems>

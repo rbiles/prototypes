@@ -1,0 +1,6 @@
+// QueryTemplate:SyslogToSentinel
+declare query_parameters();
+
+cluster("CDOC").database("Network").SyslogV2
+| where ingestion_time() > ago(1m)
+| take 30000

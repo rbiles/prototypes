@@ -1,0 +1,24 @@
+{
+  "DataType": "LINUX_SYSLOGS_BLOB",
+  "IPName": "logmanagement",
+  "DataItems": [
+    {
+      "Timestamp": "2020-12-10T20:26:11.1093359Z",
+      "Host": "varunkum1",
+      "HostIP": "157.59.144.87",
+      "ProcessId": 321,
+      "Facility": "auth",
+      "Severity": "alert",
+      "Message": "test syslog 1"
+    },
+    {
+      "Timestamp": "2020-12-10T20:26:11.1093359Z",
+      "Host": "varunkum1",
+      "HostIP": "157.59.144.87",
+      "ProcessId": 1234,
+      "Facility": "cron",
+      "Severity": "crit",
+      "Message": "test syslog 2"
+    }
+  ]
+}

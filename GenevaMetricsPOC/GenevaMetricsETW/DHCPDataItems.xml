@@ -1,0 +1,12 @@
+﻿<DataItems IPName="Security" ManagementGroupId="00000000-0000-0000-0000-000000000001"
+           HealthServiceSourceId="27a34970-d402-4e07-b278-4b511d27f160" DataType="DHCP_ACTIVITY_BLOB">
+  <DataItem type="System.PropertyBagData" time="2019-09-17T23:52:59.39Z" sourceHealthServiceId="27a34970-d402-4e07-b278-4b511d27f160">
+    <Property Name="SourceSystem">OpsManager</Property>
+    <Property Name="TimeGenerated">2019-09-17T23:54:59.4116549+00:00</Property>
+    <Property Name="EventID">1969</Property>
+    <Property Name="Description">Life Cleanup Begin</Property>
+    <Property Name="IPAddress">Florida</Property>
+    <Property Name="HostName">Kaye</Property>
+    <Property Name="MACAddress">Nether</Property>
+  </DataItem>
+</DataItems>

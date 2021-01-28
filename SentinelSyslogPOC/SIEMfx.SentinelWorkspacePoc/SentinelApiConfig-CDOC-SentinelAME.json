@@ -1,0 +1,33 @@
+﻿{
+  "EnabledSentinelUploads": {
+    "LoadSecurityEventLog": false,
+    "SyslogToCustomLog": true,
+    "LoadFileContents": false,
+    "UploadFolderContents": false,
+    "SyslogToLinuxSyslog": true,
+    "SyslogToCefSyslog": true,
+    "CefFilesToSentinelProcessor": true,
+    "CefFileFolderToUpload": "\\\\RedWSFDev01\\e$\\SyslogPOC\\CefFiles"
+  },
+  "KustoDataSourceConfig": {
+    "ClusterUri": "cdoc.kusto.windows.net",
+    "Database": "Network"
+  },
+  "AgentGuid": "55270A70-AC47-C853-C617-236B0CFF9B4C",
+  "WorkspaceId": "f057c0d4-58f8-4ddf-a6e9-61ac61674b56",
+  "OdsEndpointUri": "ods.opinsights.azure.com",
+  "OmsEndpointUri": "oms.opinsights.azure.com",
+  "ManagementGroupId": "00000000-0000-0000-0000-000000000001",
+  "UseMmaCertificate": "true",
+  "EventIngestBatchSize": "200",
+  "MaxIngestorCount": "20",
+  "MaxItemLingerTime": "1000",
+  "DataType": "SECURITY_WEF_EVENT_BLOB",
+  "LogName": "SyslogTest03",
+  "IPName": "Security",
+  "KeyVaultUri": "SensorFabricKVTst.vault.azure.net",
+  "CertificateThumbprint": "052bcd62acf061fc0461223e3408e1c39addc29b",
+  "SyslogToAzureBlobStorageSecret": "DefsStorageMgmtPPEConnStr01",
+  "StoreDataToBlobStorage": true,
+  "UseKeyVaultForCertificates": false
+}

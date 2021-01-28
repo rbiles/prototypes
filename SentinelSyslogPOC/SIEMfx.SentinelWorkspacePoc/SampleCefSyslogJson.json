@@ -1,0 +1,16 @@
+{
+  "DataType": "SECURITY_CEF_BLOB",
+  "IPName": "Security",
+  "DataItems": [
+    {
+      "Timestamp": "2020-12-11T08:17:14.3530954Z",
+      "EventTime": "2020-12-11T08:17:14.3530954Z",
+      "Host": "tip-test-host",
+      "HostIP": "131.107.23.67",
+      "ident": "CEF",
+      "Facility": "local4",
+      "Severity": "crit",
+      "Message": "CEF: 0|Barracuda|WAF|801|121|INVALID_HEADER|2|src=195.228.75.149 spt=22454 dst=10.0.0.10 dpt=443 actionTaken=LOG attackDescription=INVALID_HEADER attackDetails=[#001] attackGroup=ATTACK_CATEGORY_PROTOCOL attackId=29121 logType=WF app=HTTP request=10.0.0.10/ rt=1472451169400"
+    }
+  ]
+}
