@@ -9,22 +9,21 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Reactive.Kql;
 using System.Reactive.Kql.CustomTypes;
+using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
-using LogAnalyticsOdsApiHarness.CustomTypes;
+using System.Text;
+using System.Threading.Tasks;
+using GenevaETW.API;
+using GenevaEtwPOC.CustomTypes;
 using Newtonsoft.Json;
 using Tx.Windows;
 
-namespace LogAnalyticsOdsApiHarness
+namespace GenevaEtwPOC
 {
-    using System.Net.Http;
-    using System.Net.Http.Headers;
-    using System.Security.Cryptography.X509Certificates;
-    using System.Text;
-    using System.Threading.Tasks;
-
     public class EtwListener : IDisposable
     {
         public SentinelApiConfig SentinelApiConfig { get; set; }
@@ -50,11 +49,33 @@ namespace LogAnalyticsOdsApiHarness
 
         private X509Certificate2 logAnalyticsX509Certificate2 { get; set; }
 
+        private MetricsManager sloMetricsManager { get; set; }
+
+        private DateTime lastRxKqlEventTime { get; set; } = DateTime.UtcNow;
+
+
         public EtwListener(SentinelApiConfig sentinelApiConfig, EtwListenerConfig etwListenerConfig, bool useEventIngest)
         {
             EtwListenerConfig = etwListenerConfig;
             SentinelApiConfig = sentinelApiConfig;
             UseEventIngest = useEventIngest;
+
+            // Initialize on the first heartbeat after the HostBuilder loads all configs
+            if (sloMetricsManager == null && SentinelApiConfig.SloMetricsConfiguration != null)
+            {
+                // Set up the SLO metrics logging mechanism
+                var sloMetricsConfiguration = new SloMetricsConfiguration
+                {
+                    MetricsNamespace = SentinelApiConfig.SloMetricsConfiguration.MetricsNamespace,
+                    MetricsAccount = SentinelApiConfig.SloMetricsConfiguration.MetricsAccount,
+                    LocationId = SentinelApiConfig.SloMetricsConfiguration.LocationId,
+                    MinimumValue = SentinelApiConfig.SloMetricsConfiguration.MinimumValue,
+                    BucketSize = SentinelApiConfig.SloMetricsConfiguration.BucketSize,
+                    BucketCount = SentinelApiConfig.SloMetricsConfiguration.BucketCount
+                };
+
+                sloMetricsManager = new MetricsManager(sloMetricsConfiguration);
+            }
 
             // Turn on the Provider, and listen
             InitializeEtwListener();
@@ -106,6 +127,17 @@ namespace LogAnalyticsOdsApiHarness
 
             Console.WriteLine(
                 $"EtwListenerConfig.ObservableName: [{EtwListenerConfig.ObservableName}] TimeCreated: {output["TimeCreated"]}  EventId: {output["EventId"]}  ProcessName: [{output["ProcessName"]}]");
+
+            var eventJson = JsonConvert.SerializeObject(output);
+
+            // Create SLO record for latency of files transferred
+            TimeSpan ts = DateTime.UtcNow - lastRxKqlEventTime;
+            sloMetricsManager.InsertEtwEventToGeneva((ulong)ts.TotalMilliseconds, $"{Environment.MachineName}:GenevaEtwPOC", eventJson);
+
+
+            sloMetricsManager.InsertEtwEventToGenevaCopy((long) ts.TotalMilliseconds, $"{Environment.MachineName}:GenevaEtwPOC", eventJson);
+
+            lastRxKqlEventTime = DateTime.UtcNow;
         }
 
         private void EtwProviderSession(string sessionName, Guid providerId, bool startSession)

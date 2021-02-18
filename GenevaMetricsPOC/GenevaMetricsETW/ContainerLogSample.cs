@@ -2,12 +2,11 @@
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogAnalyticsOdsApiHarness
+namespace GenevaEtwPOC
 {
     public class ContainerLogSample
     {

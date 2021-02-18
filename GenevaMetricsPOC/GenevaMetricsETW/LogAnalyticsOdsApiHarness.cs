@@ -4,23 +4,23 @@
 // *                                                       *
 // ********************************************************/
 
-namespace LogAnalyticsOdsApiHarness
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Configuration;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Linq;
-    using System.Net;
-    using System.Reactive.Kql;
-    using System.Reflection;
-    using System.ServiceProcess;
-    using System.Threading;
-    using System.Timers;
-    using global::LogAnalyticsOdsApiHarness.CustomTypes;
-    using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Reactive.Kql;
+using System.Reflection;
+using System.ServiceProcess;
+using System.Threading;
+using System.Timers;
+using GenevaEtwPOC.CustomTypes;
+using Newtonsoft.Json;
 
+namespace GenevaEtwPOC
+{
     public class LogAnalyticsOdsApiHarness : ServiceBase
     {
         private System.Timers.Timer HeartbeatTimer { get; set; }
@@ -79,15 +79,7 @@ namespace LogAnalyticsOdsApiHarness
             string operationAction = ConfigurationManager.AppSettings["OperationAction"].ToLower();
 
             //TODO: Perform service startup actions
-            if (operationAction.ToLower().Equals("containerlog"))
-            {
-                ContainerLogNew.InsertSampleDataSet();
-            }
-            else if (operationAction.ToLower().Equals("dhcp"))
-            {
-                DhcpLogSample.SendDataToODS_DhcpLog();
-            }
-            else if (operationAction.ToLower().Equals("evtx"))
+            if (operationAction.ToLower().Equals("evtx"))
             {
                 EvtxLogSample.UploadFolderContents();
             }

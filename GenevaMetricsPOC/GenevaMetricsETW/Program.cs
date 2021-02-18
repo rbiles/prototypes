@@ -4,13 +4,13 @@
 // *                                                       *
 // ********************************************************/
 
-namespace LogAnalyticsOdsApiHarness
-{
-    using System;
-    using System.Linq;
-    using System.ServiceProcess;
-    using System.Threading;
+using System;
+using System.Linq;
+using System.ServiceProcess;
+using System.Threading;
 
+namespace GenevaEtwPOC
+{
     class Program
     {
         static void Main(string[] args)

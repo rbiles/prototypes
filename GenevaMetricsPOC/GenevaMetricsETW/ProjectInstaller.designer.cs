@@ -1,9 +1,5 @@
-﻿using System;
-
-namespace LogAnalyticsOdsApiHarness
+﻿namespace GenevaEtwPOC
 {
-    using System;
-
     public partial class ProjectInstaller
     {
         /// <summary>

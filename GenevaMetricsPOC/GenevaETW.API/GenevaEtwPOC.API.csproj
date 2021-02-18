@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>GenevaETW.API</RootNamespace>
+    <AssemblyName>GenevaETW.API</AssemblyName>    
+    <OutputType>Library</OutputType>
+    <Company>Microsoft</Company>    
+    <Authors>Microsoft MSRC</Authors>
+    <Title>GenevaETW.API</Title>
+    <Description>GenevaETW.API</Description>
+    <PackageProjectUrl>https://msazure.pkgs.visualstudio.com/_packaging/NugetMirror/nuget/v3/index.json</PackageProjectUrl>
+    <RepositoryUrl>https://msazure.visualstudio.com/One/_git/SecEng-Dev-SIEMfx</RepositoryUrl>
+    <PackageReleaseNotes>Supported Platforms: .NET 4.6.1, .NET Core</PackageReleaseNotes>
+    <PackageTags>Microsoft;SIEMfx;Common</PackageTags>
+    <Copyright>Copyright © Microsoft Coporation</Copyright>
+    <Version>1.0.0</Version>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <IncludeSymbols>false</IncludeSymbols>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Cloud.InstrumentationFramework.Metrics.NetStd" Version="1.2.1011530001" />
+    <PackageReference Include="Microsoft.Cloud.InstrumentationFramework.NetStd" Version="1.2.1011530001" />
+    <PackageReference Include="Microsoft.Cloud.InstrumentationFramework.Metrics.Extensions" Version="2.2020.413.1134" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Rx.Kql" Version="3.2.2" />
+    <PackageReference Include="System.Diagnostics.EventLog" Version="4.7.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+</Project>

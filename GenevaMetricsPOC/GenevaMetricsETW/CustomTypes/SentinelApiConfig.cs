@@ -4,10 +4,10 @@
 // *                                                       *
 // ********************************************************/
 
-namespace LogAnalyticsOdsApiHarness.CustomTypes
-{
-    using System;
+using GenevaETW.API;
 
+namespace GenevaEtwPOC.CustomTypes
+{
     public class SentinelApiConfig
     {
         public string WorkspaceId { get; set; }
@@ -31,5 +31,7 @@ namespace LogAnalyticsOdsApiHarness.CustomTypes
         public string DataType { get; set; }
 
         public string IpName { get; set; }
+
+        public SloMetricsConfiguration SloMetricsConfiguration { get; set; }
     }
 }

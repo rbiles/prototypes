@@ -1,13 +1,21 @@
-﻿  {
-    "AgentGuid": "d0bd5ba9-c7b6-44f0-8e3d-9bfb595038c7",
-    "WorkspaceId": "3fe71082-7ddb-48cc-a594-811df744849",
-    "OdsEnpointUri": "ods.opinsights.azure.com",
-    "CertificateThumbprint": "9c4ac2e96bd03e113ae3fb0b3689b0d680b8cf2c",
-    "ManagementGroupId": "00000000-0000-0000-0000-000000000001",
-    "UseMmaCertificate": "false",
-    "EventIngestBatchSize": "200",
-    "MaxIngestorCount": "20",
-    "MaxItemLingerTime": "1000",
-    "DataType": "SECURITY_WEF_EVENT_BLOB",
-    "IPName": "Security"
+﻿{
+  "AgentGuid": "d0bd5ba9-c7b6-44f0-8e3d-9bfb595038c7",
+  "WorkspaceId": "3fe71082-7ddb-48cc-a594-811df744849",
+  "OdsEnpointUri": "ods.opinsights.azure.com",
+  "CertificateThumbprint": "9c4ac2e96bd03e113ae3fb0b3689b0d680b8cf2c",
+  "ManagementGroupId": "00000000-0000-0000-0000-000000000001",
+  "UseMmaCertificate": "false",
+  "EventIngestBatchSize": "200",
+  "MaxIngestorCount": "20",
+  "MaxItemLingerTime": "1000",
+  "DataType": "SECURITY_WEF_EVENT_BLOB",
+  "IPName": "Security",
+  "SloMetricsConfiguration": {
+    "MetricsNamespace": "SECEVENTGCS",
+    "MetricsAccount": "cdocseceng",
+    "LocationId": "SouthCentral",
+    "MinimumValue": 10,
+    "BucketSize": 10,
+    "BucketCount": 2000
   }
+}

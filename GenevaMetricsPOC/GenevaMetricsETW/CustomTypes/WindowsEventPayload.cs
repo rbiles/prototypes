@@ -4,24 +4,20 @@
 // *                                                       *
 // ********************************************************/
 
-namespace LogAnalyticsOdsApiHarness.CustomTypes
-{
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Diagnostics.Eventing.Reader;
-    using System.Linq;
-    using System.Net;
-    using System.Net.NetworkInformation;
-    using System.Text;
-    using System.Xml;
-    using System.Xml.Linq;
-    using Event.Ingest;
-    using Event.Ingest.Components;
-    using Event.Ingest.Diagnostics;
-    using Event.Ingest.Ods;
-    using Microsoft.Win32;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
+using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Text;
+using System.Xml;
+using System.Xml.Linq;
+using Microsoft.Win32;
 
+namespace GenevaEtwPOC.CustomTypes
+{
     public class WindowsEventPayload
     {
         private readonly string headerTemplate =
@@ -29,13 +25,9 @@ namespace LogAnalyticsOdsApiHarness.CustomTypes
 
         private readonly string footerTemplate = "</DataItems>";
 
-        private OdsUploaderConfig config { get; set; }
-
         public int BatchItemCount = 0;
 
         public TimeSpan BatchTimeSpan;
-
-        public Uploader<string> Uploader { get; set; }
 
         public string ManagementGroupId { get; set; }
 
@@ -55,21 +47,6 @@ namespace LogAnalyticsOdsApiHarness.CustomTypes
         public WindowsEventPayload()
         {
             DataItems = new ConcurrentBag<string>();
-        }
-
-        public void InitializeEventIngest()
-        {
-            config = new OdsUploaderConfig()
-            {
-                BatchSize = SentinenApiConfig.EventIngestBatchSize,
-                MaxItemLingerTime = TimeSpan.FromMilliseconds(SentinenApiConfig.MaxItemLingerTime),
-                WorkspaceId = WorkspaceId,
-                MaxIngestorCount = SentinenApiConfig.MaxIngestorCount,
-            };
-
-            Uploader = OdsUploadHelper.CreateUploader(config);
-            Uploader.BatchAction += Uploader_BatchAction;
-            //UploaderEventSource.Instance.GetDefaultListener().LogRecordReceived += Uploader_LogRecordReceived;
         }
 
         public string GetLogAnalyticsResourceId(string workspaceId)
@@ -114,20 +91,6 @@ namespace LogAnalyticsOdsApiHarness.CustomTypes
             }
 
             return hostName;                   
-        }
-
-        private void Uploader_BatchAction(object sender, BatchActionEventArgs<string> e)
-        {
-            if (e.Batch.Action == UploaderAction.Ingest)
-            {
-                BatchItemCount += e.Batch.ItemCount;
-                BatchTimeSpan += e.Batch.Duration;
-            }
-        }
-
-        private static void Uploader_LogRecordReceived(object sender, Event.Ingest.Diagnostics.UploaderLogRecordEventArgs e)
-        {
-            Console.WriteLine(e.Record.Message);
         }
 
         public void AddEvent(EtwListener etwListener, IDictionary<string, object> evt, bool useEventIngest)
@@ -351,7 +314,7 @@ namespace LogAnalyticsOdsApiHarness.CustomTypes
         {
             if (useEventIngest)
             {
-                Uploader.OnNext(dataItem);
+                //Uploader.OnNext(dataItem);
             }
             else
             {

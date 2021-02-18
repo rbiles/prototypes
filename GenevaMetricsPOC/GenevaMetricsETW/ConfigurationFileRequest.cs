@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LogAnalyticsOdsApiHarness
+namespace GenevaEtwPOC
 {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [Serializable()]
