@@ -188,8 +188,8 @@ namespace GenevaEtwPOC.CustomTypes
                 writer.WriteAttributeString("time", eventTimeUtc);
                 writer.WriteAttributeString("sourceHealthServiceId", WorkspaceId);
                 //Nested elements
-                writer.WriteElementString("EventOriginId", "{7C384BE3-8EBD-4B86-A392-357AA34750C5}");
-                writer.WriteElementString("PublisherId", $"{{{(eventRecord.ProviderId ?? Guid.Empty).ToString()}}}");
+                writer.WriteElementString("EventOriginId", "7C384BE3-8EBD-4B86-A392-357AA34750C5");
+                writer.WriteElementString("PublisherId", $"{(eventRecord.ProviderId ?? Guid.Empty).ToString()}");
                 writer.WriteElementString("PublisherName", eventRecord.ProviderName);
                 writer.WriteElementString("EventSourceName", eventRecord.ProviderName);
                 writer.WriteElementString("Channel", eventRecord.LogName ?? "Unknown");
@@ -227,6 +227,8 @@ namespace GenevaEtwPOC.CustomTypes
 
         private string XmlWriterEtwEventDictionary(EtwListener etwListener, IDictionary<string, object> eventValue)
         {
+            return null;
+
             var sb = new StringBuilder();
             var stt = new XmlWriterSettings();
             stt.ConformanceLevel = ConformanceLevel.Fragment;
@@ -244,7 +246,7 @@ namespace GenevaEtwPOC.CustomTypes
 
                 //Nested elements
                 writer.WriteElementString("EventOriginId", "{7C384BE3-8EBD-4B86-A392-357AA34750C5}");
-                writer.WriteElementString("PublisherId", $"{{{etwListener.EtwListenerConfig.ProviderId.ToString()}}}");
+                writer.WriteElementString("PublisherId", $"{etwListener.EtwListenerConfig.ProviderId.ToString()}");
                 writer.WriteElementString("PublisherName", etwListener.EtwListenerConfig.ProviderName);
                 writer.WriteElementString("EventSourceName", etwListener.EtwListenerConfig.ProviderName);
                 writer.WriteElementString("Channel", etwListener.EtwListenerConfig.ObservableName);

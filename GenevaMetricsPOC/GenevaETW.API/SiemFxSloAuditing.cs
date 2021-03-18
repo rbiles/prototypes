@@ -5,6 +5,8 @@
 // ********************************************************/
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using Microsoft.Cloud.InstrumentationFramework;
 using Microsoft.Cloud.InstrumentationFramework.Metrics.Extensions;
 
@@ -25,9 +27,11 @@ namespace GenevaETW.API
         private readonly string MetricNamespace;
         private readonly IMdmMetric<DimensionValues4D, ulong> metricOneAgentEtwEvent;
 
-        private readonly MeasureMetric4D metricOneAgentEtwEventCopy;
-        private readonly string MonitoringAccount;
+        private readonly MeasureMetric7D metricOneAgentEtwDestinationBytes;
+        private readonly IMdmMetric<DimensionValues11D, ulong> metricOneAgentEtwTcpNetworkBytes;
+        private readonly IMdmMetric<DimensionValues11D, ulong> metricOneAgentEtwTcpNetworkCount;
 
+        private readonly string MonitoringAccount;
 
         public MetricsManager(SloMetricsConfiguration cfg)
         {
@@ -109,14 +113,53 @@ namespace GenevaETW.API
                 "LastRecordWritten"
             );
 
-            metricOneAgentEtwEventCopy = MeasureMetric4D.Create(
+            metricOneAgentEtwDestinationBytes = MeasureMetric7D.Create(
                 MonitoringAccount,
                 MetricNamespace,
-                "CdocOneAgentEtwEventCopy",
+                "CdocOneAgentEtwDestinationBytes",
                 "CustomerResourceId", // Mandatory customer resource dimension
                 "LocationId", // Mandatory topology dimension
-                "RecordType",
-                "LastRecordWritten"
+                "TimeCreated",
+                "DestinationIpAddress",
+                "ProcessId",
+                "ProcessName",
+                "Bytes"
+            );
+
+            metricOneAgentEtwTcpNetworkBytes = metricFactory.CreateUInt64Metric(
+                MdmMetricFlags.CumulativeMetricDefault,
+                MonitoringAccount,
+                MetricNamespace,
+                "CdocOneAgentEtwTcpNetworkBytes",
+                "CustomerResourceId", // Mandatory customer resource dimension
+                "LocationId", // Mandatory topology dimension
+                "TimeCreated",
+                "EventId",
+                "ProcessName",
+                "ProcessId",
+                "DestinationIpAddress",
+                "DestinationPort",
+                "SourceIpAddress",
+                "SourcePort",
+                "Bytes"
+            );
+
+            metricOneAgentEtwTcpNetworkCount = metricFactory.CreateUInt64Metric(
+                MdmMetricFlags.CumulativeMetricDefault,
+                MonitoringAccount,
+                MetricNamespace,
+                "CdocOneAgentEtwTcpNetworkCount",
+                "CustomerResourceId", // Mandatory customer resource dimension
+                "LocationId", // Mandatory topology dimension
+                "TimeCreated",
+                "EventId",
+                "ProcessName",
+                "ProcessId",
+                "DestinationIpAddress",
+                "DestinationPort",
+                "SourceIpAddress",
+                "SourcePort",
+                "Count"
             );
 
             if (metricMeasureForServiceUp == null)
@@ -226,23 +269,78 @@ namespace GenevaETW.API
                     Could not update file latency measure for {customerResourceId}");
         }
 
-
-        public void InsertEtwEventToGenevaCopy(long lastRecordWrittenUlong, string customerResourceId, string eventData)
+        public void InsertEtwEventDestinationBytes(string customerResourceId, IDictionary<string, object> eventData)
         {
             var dimValues = DimensionValues.Create(
                 customerResourceId,
                 Environment.MachineName,
-                "CdocEtwEvent",
-                lastRecordWrittenUlong.ToString()
+                "TimeCreated",
+                "DestinationIpAddress",
+                "ProcessId",
+                "ProcessName",
+                "Bytes"
             );
 
             // Updates the latency histogram
-            var success = metricOneAgentEtwEventCopy?.LogValue(lastRecordWrittenUlong, customerResourceId,
-                Environment.MachineName, "EtwEvent", "LastRecordWritten") ?? false;
+            var success = metricOneAgentEtwDestinationBytes?.LogValue(
+                (long)eventData["Bytes"],
+                customerResourceId,
+                Environment.MachineName,
+                eventData["TimeCreated"].ToString(),
+                eventData["DestinationIpAddress"].ToString(),
+                eventData["ProcessId"].ToString(),
+                eventData["ProcessName"].ToString(),
+                "Bytes") ?? false;
 
             if (success)
                 SIEMfxEventSource.Log.Information("EtwEvent",
                     $@"Ifx update File Success Rate histogram {eventData}, {dimValues}");
+            else
+                SIEMfxEventSource.Log.Information("IfxMetrics", $@"Ifx Configuration - 
+                    Could not update file latency measure for {customerResourceId}");
+        }
+
+        public void InsertEtwEventTcpNetwork(string customerResourceId, IDictionary<string, object> eventData)
+        {
+            var dimBytesValues = DimensionValues.Create(
+                customerResourceId,
+                Environment.MachineName,
+                eventData["TimeCreated"].ToString(),
+                eventData["EventId"].ToString(),
+                eventData["ProcessName"].ToString(),
+                eventData["ProcessId"].ToString(),
+                eventData["DestinationIpAddress"].ToString(),
+                eventData["DestinationPort"].ToString(),
+                eventData["SourceIpAddress"].ToString(),
+                eventData["SourcePort"].ToString(),
+                eventData["Bytes"].ToString()
+            );
+
+            var dimCountValues = DimensionValues.Create(
+                customerResourceId,
+                Environment.MachineName,
+                eventData["TimeCreated"].ToString(),
+                eventData["EventId"].ToString(),
+                eventData["ProcessName"].ToString(),
+                eventData["ProcessId"].ToString(),
+                eventData["DestinationIpAddress"].ToString(),
+                eventData["DestinationPort"].ToString(),
+                eventData["SourceIpAddress"].ToString(),
+                eventData["SourcePort"].ToString(),
+                eventData["Count"].ToString()
+            );
+
+            // Updates the latency histogram
+            var successCount = metricOneAgentEtwTcpNetworkCount?.Set(
+                value: Convert.ToUInt64(eventData["Count"]), dimCountValues) ?? false;
+
+            // Updates the latency histogram
+            var successBytes = metricOneAgentEtwTcpNetworkBytes?.Set(
+                Convert.ToUInt64(eventData["Bytes"]), dimBytesValues) ?? false;
+
+            if (successBytes || successCount)
+                SIEMfxEventSource.Log.Information("EtwEvent",
+                    $@"Ifx update File Success Rate histogram {eventData}, {"Values"}");
             else
                 SIEMfxEventSource.Log.Information("IfxMetrics", $@"Ifx Configuration - 
                     Could not update file latency measure for {customerResourceId}");

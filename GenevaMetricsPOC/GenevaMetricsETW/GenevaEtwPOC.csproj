@@ -87,7 +87,7 @@
     <None Update="SentinelApiConfig-CDOC-SentinelUAT.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SentinelApiConfig-CDOCProdNA.json">
+    <None Update="SentinelApiConfig-CDOC-SentinelUAT.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="SentinelApiConfig-MSRCASI.json">
@@ -103,6 +103,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="SyslogToLinuxSyslog.kql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="XMLFile1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -1,8 +1,8 @@
 ﻿{
   "AgentGuid": "d0bd5ba9-c7b6-44f0-8e3d-9bfb595038c7",
-  "WorkspaceId": "3fe71082-7ddb-48cc-a594-811df744849",
-  "OdsEnpointUri": "ods.opinsights.azure.com",
-  "CertificateThumbprint": "9c4ac2e96bd03e113ae3fb0b3689b0d680b8cf2c",
+  "WorkspaceId": "5d9bd0d5-7ee5-4239-bdd4-f284cee8fba7",
+  "OdsEndpointUri": "ods.opinsights.azure.com",
+  "CertificateThumbprint": "13d4c5d825cc342e86888e61aa6fbedb0f06b003",
   "ManagementGroupId": "00000000-0000-0000-0000-000000000001",
   "UseMmaCertificate": "false",
   "EventIngestBatchSize": "200",
@@ -12,7 +12,7 @@
   "IPName": "Security",
   "SloMetricsConfiguration": {
     "MetricsNamespace": "SECEVENTGCS",
-    "MetricsAccount": "cdocseceng",
+    "MetricsAccount": "CDOCSecEngSF",
     "LocationId": "SouthCentral",
     "MinimumValue": 10,
     "BucketSize": 10,

@@ -5,12 +5,13 @@
 // ********************************************************/
 
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.NetworkInformation;
 using System.Reactive.Kql;
 using System.Reactive.Kql.CustomTypes;
 using System.Security.Cryptography.X509Certificates;
@@ -26,35 +27,14 @@ namespace GenevaEtwPOC
 {
     public class EtwListener : IDisposable
     {
-        public SentinelApiConfig SentinelApiConfig { get; set; }
-
-        // DNS Provider
-        public string SessionName { get; set; }
-
-        public Guid ProviderIdGuid { get; set; }
-
-        public EtwListenerType EtwListenerType { get; set; }
-
-        public KqlNodeHub KqlNodeHub { get; set; }
-
-        public bool UseEventIngest { get; set; }
-
-        public WindowsEventPayload payload { get; set; }
-
-        public EtwListenerConfig EtwListenerConfig { get; set; }
-
-        private DateTime lastUploadTime { get; set; } = DateTime.UtcNow;
+        private static readonly string XmlMediaType = "application/xml";
+        private static readonly string JsonMediaType = "application/json";
 
         private readonly object uploadLock = new object();
 
-        private X509Certificate2 logAnalyticsX509Certificate2 { get; set; }
 
-        private MetricsManager sloMetricsManager { get; set; }
-
-        private DateTime lastRxKqlEventTime { get; set; } = DateTime.UtcNow;
-
-
-        public EtwListener(SentinelApiConfig sentinelApiConfig, EtwListenerConfig etwListenerConfig, bool useEventIngest)
+        public EtwListener(SentinelApiConfig sentinelApiConfig, EtwListenerConfig etwListenerConfig,
+            bool useEventIngest)
         {
             EtwListenerConfig = etwListenerConfig;
             SentinelApiConfig = sentinelApiConfig;
@@ -81,61 +61,104 @@ namespace GenevaEtwPOC
             InitializeEtwListener();
         }
 
+        public SentinelApiConfig SentinelApiConfig { get; set; }
+
+        // DNS Provider
+        public string SessionName { get; set; }
+
+        public Guid ProviderIdGuid { get; set; }
+
+        public EtwListenerType EtwListenerType { get; set; }
+
+        public KqlNodeHub KqlNodeHub { get; set; }
+
+        public bool UseEventIngest { get; set; }
+
+        public WindowsEventPayload payload { get; set; }
+
+        public EtwListenerConfig EtwListenerConfig { get; set; }
+
+        private DateTime lastUploadTime { get; set; } = DateTime.UtcNow;
+
+        private X509Certificate2 logAnalyticsX509Certificate2 { get; set; }
+
+        private MetricsManager sloMetricsManager { get; }
+
+        private DateTime lastRxKqlEventTime { get; set; } = DateTime.UtcNow;
+
+        public void Dispose()
+        {
+            // Stop the providers on class disposal
+            EtwProviderSession(EtwListenerConfig.SessionName, EtwListenerConfig.ProviderId, false);
+        }
+
         public void InitializeEtwListener()
         {
             payload = GetNewPayloadObject();
 
-            string configurationFile = ConfigurationManager.AppSettings["SentinelApiConfig"];
+            var configurationFile = ConfigurationManager.AppSettings["SentinelApiConfig"];
 
             EtwProviderSession(EtwListenerConfig.SessionName, EtwListenerConfig.ProviderId, true);
-            IObservable<IDictionary<string, object>> _etw = EtwTdhObservable.FromSession(EtwListenerConfig.SessionName);
+            var _etw = EtwTdhObservable.FromSession(EtwListenerConfig.SessionName);
 
-            KqlNodeHub = KqlNodeHub.FromKqlQuery(_etw, DefaultOutput, EtwListenerConfig.ObservableName, EtwListenerConfig.KqlQuery);
+            KqlNodeHub = KqlNodeHub.FromKqlQuery(_etw, DefaultOutput, EtwListenerConfig.ObservableName,
+                EtwListenerConfig.KqlQuery);
 
             GlobalLog.WriteToStringBuilderLog($"Loading config [{configurationFile}].", 14001);
-            string textOfJsonConfig = File.ReadAllText(Path.Combine(LogAnalyticsOdsApiHarness.GetExecutionPath(), $"{configurationFile}"));
+            var textOfJsonConfig =
+                File.ReadAllText(Path.Combine(LogAnalyticsOdsApiHarness.GetExecutionPath(), $"{configurationFile}"));
             SentinelApiConfig = JsonConvert.DeserializeObject<SentinelApiConfig>(textOfJsonConfig);
 
             if (SentinelApiConfig.UseMmaCertificate)
-            {
-                logAnalyticsX509Certificate2 = CertificateManagement.FindOdsCertificateByWorkspaceId(SentinelApiConfig.WorkspaceId);
-            }
+                logAnalyticsX509Certificate2 =
+                    CertificateManagement.FindOdsCertificateByWorkspaceId(SentinelApiConfig.WorkspaceId);
             else
-            {
-                logAnalyticsX509Certificate2 = CertificateManagement.FindCertificateByThumbprint("MY", SentinelApiConfig.CertificateThumbprint, StoreLocation.LocalMachine);
-            }
+                logAnalyticsX509Certificate2 = CertificateManagement.FindCertificateByThumbprint("MY",
+                    SentinelApiConfig.CertificateThumbprint, StoreLocation.LocalMachine);
+
+            GlobalLog.WriteToStringBuilderLog($"SampleData load [{configurationFile}].", 14001);
+            var sampleData =
+                File.ReadAllText(Path.Combine(LogAnalyticsOdsApiHarness.GetExecutionPath(), $"XMLFile1.xml"));
+            UploadBatchToLogAnalytics(sampleData, logAnalyticsX509Certificate2);
         }
 
-        private void DefaultOutput(KqlOutput e) // The type should not be called Detection nor Alert and should not be in separate namespace
+        private void
+            DefaultOutput(
+                KqlOutput e) // The type should not be called Detection nor Alert and should not be in separate namespace
         {
             var output = e.Output; // this is no longer alert. "Output" is better name for the property
 
             if (DateTime.UtcNow.AddSeconds(-30) > lastUploadTime)
-            {
                 lock (uploadLock)
                 {
                     // Uplaod the current cache of records
-                    UploadPayloadCacheInBatches(logAnalyticsX509Certificate2);
+                    // UploadPayloadCacheInBatches(logAnalyticsX509Certificate2);
 
                     // Update last upload time and create a new payload object
                     lastUploadTime = DateTime.UtcNow;
                     payload = GetNewPayloadObject();
+                    Console.WriteLine(string.Empty);
                 }
-            }
 
             payload.AddEvent(this, output, UseEventIngest);
 
-            Console.WriteLine(
-                $"EtwListenerConfig.ObservableName: [{EtwListenerConfig.ObservableName}] TimeCreated: {output["TimeCreated"]}  EventId: {output["EventId"]}  ProcessName: [{output["ProcessName"]}]");
-
             var eventJson = JsonConvert.SerializeObject(output);
 
+            StringBuilder sbRecord = new StringBuilder("Event:");
+            foreach (var outputKey in output.Keys)
+            {
+                sbRecord.Append($" {outputKey}: {output[outputKey]}");
+            }
+
+            Console.WriteLine(sbRecord.ToString());
+
             // Create SLO record for latency of files transferred
-            TimeSpan ts = DateTime.UtcNow - lastRxKqlEventTime;
-            sloMetricsManager.InsertEtwEventToGeneva((ulong)ts.TotalMilliseconds, $"{Environment.MachineName}:GenevaEtwPOC", eventJson);
+            var ts = DateTime.UtcNow - lastRxKqlEventTime;
+            sloMetricsManager.InsertEtwEventToGeneva((ulong) ts.TotalMilliseconds,
+                $"{Environment.MachineName}:GenevaEtwPOC", eventJson);
 
-
-            sloMetricsManager.InsertEtwEventToGenevaCopy((long) ts.TotalMilliseconds, $"{Environment.MachineName}:GenevaEtwPOC", eventJson);
+            sloMetricsManager.InsertEtwEventDestinationBytes($"{Environment.MachineName}:GenevaEtwPOC", output);
+            sloMetricsManager.InsertEtwEventTcpNetwork($"{Environment.MachineName}:GenevaEtwPOC", output);
 
             lastRxKqlEventTime = DateTime.UtcNow;
         }
@@ -146,27 +169,20 @@ namespace GenevaEtwPOC
             if (!principal.IsInRole(WindowsBuiltInRole.Administrator))
                 throw new Exception("To use ETW real-time session you must be administrator");
 
-            Process logman = Process.Start("logman.exe", "stop " + sessionName + " -ets");
+            var logman = Process.Start("logman.exe", "stop " + sessionName + " -ets");
             logman.WaitForExit();
 
-            if (!startSession)
-            {
-                return;
-            }
+            if (!startSession) return;
 
-            logman = Process.Start("logman.exe", "create trace " + sessionName + " -rt -nb 2 2 -bs 1024 -p {" + providerId + "} 0xffffffffffffffff -ets");
+            logman = Process.Start("logman.exe",
+                "create trace " + sessionName + " -rt -nb 2 2 -bs 1024 -p {" + providerId +
+                "} 0xffffffffffffffff -ets");
             logman.WaitForExit();
-        }
-
-        public void Dispose()
-        {
-            // Stop the providers on class disposal
-            EtwProviderSession(EtwListenerConfig.SessionName, EtwListenerConfig.ProviderId, false);
         }
 
         private WindowsEventPayload GetNewPayloadObject()
         {
-            return new WindowsEventPayload()
+            return new WindowsEventPayload
             {
                 DataType = SentinelApiConfig.DataType,
                 IpName = SentinelApiConfig.IpName,
@@ -178,8 +194,8 @@ namespace GenevaEtwPOC
 
         private void UploadPayloadCacheInBatches(X509Certificate2 cert, int batchCount = 200)
         {
-            Stopwatch fileStopwatch = new Stopwatch();
-            Stopwatch uploaderStopwatch = Stopwatch.StartNew();
+            var fileStopwatch = new Stopwatch();
+            var uploaderStopwatch = Stopwatch.StartNew();
 
             try
             {
@@ -191,12 +207,13 @@ namespace GenevaEtwPOC
 
                 Parallel.ForEach(splitLIsts, new ParallelOptions
                     {
-                        MaxDegreeOfParallelism = 8,
+                        MaxDegreeOfParallelism = 8
                     },
                     singleBatch => { UploadBatchToLogAnalytics(payload.GetUploadBatch(singleBatch), cert); });
 
                 fileStopwatch.Stop();
-                Console.WriteLine($"\tEPS for Upload to MMA-API: {payload.DataItems.Count / fileStopwatch.Elapsed.TotalSeconds:N3}");
+                Console.WriteLine(
+                    $"\tEPS for Upload to MMA-API: {payload.DataItems.Count / fileStopwatch.Elapsed.TotalSeconds:N3}");
             }
             catch (Exception e)
             {
@@ -204,33 +221,82 @@ namespace GenevaEtwPOC
             }
         }
 
-        private void UploadBatchToLogAnalytics(string payload, X509Certificate2 cert)
+        private async void UploadBatchToLogAnalytics(string payload, X509Certificate2 cert)
         {
             try
             {
-                string requestId = Guid.NewGuid().ToString("D");
+                //string requestId = Guid.NewGuid().ToString("D");
 
-                WebRequestHandler clientHandler = new WebRequestHandler();
-                clientHandler.ClientCertificates.Add(cert);
-                var client = new HttpClient(clientHandler);
+                //WebRequestHandler clientHandler = new WebRequestHandler();
+                //clientHandler.ClientCertificates.Add(cert);
+                //var client = new HttpClient(clientHandler);
+
+                //string url = $"https://{SentinelApiConfig.WorkspaceId}.{SentinelApiConfig.OdsEndpointUri}/EventDataService.svc/PostDataItems?api-version=2016-04-01";
+                //client.DefaultRequestHeaders.Add("X-Request-ID", requestId);
+
+                //HttpContent httpContent = new StringContent(payload, Encoding.UTF8);
+                //httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                //Task<HttpResponseMessage> response = client.PostAsync(new Uri(url), httpContent);
+
+                //HttpContent responseContent = response.Result.Content;
+                //string result = responseContent.ReadAsStringAsync().Result;
+                //// Console.WriteLine("Return Result: " + result);
+                //Console.WriteLine("requestId: " + requestId);
+                //// Console.WriteLine(response.Result);
+
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+                var mtlsHandler = new HttpClientHandler
+                {
+                    UseCookies = false,
+                    AllowAutoRedirect = false
+                };
+
+                mtlsHandler.ClientCertificates.Add(cert);
+                var client = new HttpClient(mtlsHandler);
+
+                string requestId = Guid.NewGuid().ToString("D");
 
                 string url = $"https://{SentinelApiConfig.WorkspaceId}.{SentinelApiConfig.OdsEndpointUri}/EventDataService.svc/PostDataItems?api-version=2016-04-01";
                 client.DefaultRequestHeaders.Add("X-Request-ID", requestId);
+                client.DefaultRequestHeaders.Add("x-ms-AzureResourceId", GetLogAnalyticsResourceId(SentinelApiConfig.WorkspaceId));
 
-                HttpContent httpContent = new StringContent(payload, Encoding.UTF8);
-                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                HttpContent httpContent = new StringContent(payload, Encoding.UTF8, "application/xml");
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/xml");
                 Task<HttpResponseMessage> response = client.PostAsync(new Uri(url), httpContent);
 
                 HttpContent responseContent = response.Result.Content;
                 string result = responseContent.ReadAsStringAsync().Result;
-                // Console.WriteLine("Return Result: " + result);
+                Console.WriteLine("Return Result: " + result);
                 Console.WriteLine("requestId: " + requestId);
-                // Console.WriteLine(response.Result);
+                Console.WriteLine(response.Result);
             }
             catch (Exception excep)
             {
                 Console.WriteLine("API Post Exception: " + excep.Message);
             }
+        }
+
+        public static string GetLogAnalyticsResourceId(string workspaceId)
+        {
+            // This interpolated string, although it looks hacked together, is correct and validation on the ODS Web service, IF it is provided as a request header,
+            // requires the below structure with the required fields (subscriptions, resourceGroups, and providers, along with the correct amount of forward slashes (trial and error)
+            var fqdn = GetFullyQualifiedDomainName();
+            var nonAzureResourceId =
+                $"/subscriptions/{workspaceId}/resourceGroups/none/providers/computer/physical/{fqdn}";
+            return nonAzureResourceId;
+        }
+
+        private static string GetFullyQualifiedDomainName()
+        {
+            var domainName = IPGlobalProperties.GetIPGlobalProperties().DomainName;
+            var hostName = Dns.GetHostName();
+
+            domainName = "." + domainName;
+            if (!hostName.EndsWith(domainName)) hostName += domainName;
+
+            return hostName;
         }
     }
 }
