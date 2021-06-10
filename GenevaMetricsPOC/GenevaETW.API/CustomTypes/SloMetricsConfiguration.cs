@@ -4,19 +4,15 @@
 // *                                                       *
 // ********************************************************/
 
-namespace GenevaETW.API
+namespace GenevaETW.API.CustomTypes
 {
-    public class SloMetricsConfiguration
+    public class GenevaMdmConfiguration
     {
         public string MetricsNamespace { get; set; }
 
         public string MetricsAccount { get; set; }
 
         public string LocationId { get; set; }
-
-        public string TenantName { get; set; }
-
-        public string RoleName { get; set; }
 
         public int MinimumValue { get; set; }
 

@@ -10,7 +10,7 @@
   "MaxItemLingerTime": "1000",
   "DataType": "SECURITY_WEF_EVENT_BLOB",
   "IPName": "Security",
-  "SloMetricsConfiguration": {
+  "GenevaMdmConfiguration": {
     "MetricsNamespace": "SECEVENTGCS",
     "MetricsAccount": "CDOCSecEngSF",
     "LocationId": "SouthCentral",

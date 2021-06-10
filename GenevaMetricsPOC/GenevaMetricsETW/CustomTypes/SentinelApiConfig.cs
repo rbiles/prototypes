@@ -5,6 +5,7 @@
 // ********************************************************/
 
 using GenevaETW.API;
+using GenevaETW.API.CustomTypes;
 
 namespace GenevaEtwPOC.CustomTypes
 {
@@ -32,6 +33,6 @@ namespace GenevaEtwPOC.CustomTypes
 
         public string IpName { get; set; }
 
-        public SloMetricsConfiguration SloMetricsConfiguration { get; set; }
+        public GenevaMdmConfiguration SloMetricsConfiguration { get; set; }
     }
 }

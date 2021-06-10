@@ -69,9 +69,6 @@
     <None Update="SampleSyslogXML.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SentinelApiConfig-CDOC-SecEngDev-ProdPub.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="SentinelApiConfig-CDOC-Sentinel.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -79,9 +76,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="SentinelApiConfig-CDOC-SentinelSEAU-WEC.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="SentinelApiConfig-CDOC-SentinelSEAU.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="SentinelApiConfig-CDOC-SentinelUAT.json">
@@ -103,9 +97,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="SyslogToLinuxSyslog.kql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="XMLFile1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

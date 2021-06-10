@@ -19,6 +19,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using GenevaETW.API;
+using GenevaETW.API.CustomTypes;
 using GenevaEtwPOC.CustomTypes;
 using Newtonsoft.Json;
 using Tx.Windows;
@@ -41,10 +42,10 @@ namespace GenevaEtwPOC
             UseEventIngest = useEventIngest;
 
             // Initialize on the first heartbeat after the HostBuilder loads all configs
-            if (sloMetricsManager == null && SentinelApiConfig.SloMetricsConfiguration != null)
+            if (syntheticCounterManager == null && SentinelApiConfig.SloMetricsConfiguration != null)
             {
                 // Set up the SLO metrics logging mechanism
-                var sloMetricsConfiguration = new SloMetricsConfiguration
+                var sloMetricsConfiguration = new GenevaMdmConfiguration
                 {
                     MetricsNamespace = SentinelApiConfig.SloMetricsConfiguration.MetricsNamespace,
                     MetricsAccount = SentinelApiConfig.SloMetricsConfiguration.MetricsAccount,
@@ -54,7 +55,7 @@ namespace GenevaEtwPOC
                     BucketCount = SentinelApiConfig.SloMetricsConfiguration.BucketCount
                 };
 
-                sloMetricsManager = new MetricsManager(sloMetricsConfiguration);
+                syntheticCounterManager = new SyntheticCounterManager(sloMetricsConfiguration);
             }
 
             // Turn on the Provider, and listen
@@ -82,9 +83,7 @@ namespace GenevaEtwPOC
 
         private X509Certificate2 logAnalyticsX509Certificate2 { get; set; }
 
-        private MetricsManager sloMetricsManager { get; }
-
-        private DateTime lastRxKqlEventTime { get; set; } = DateTime.UtcNow;
+        private SyntheticCounterManager syntheticCounterManager { get; }
 
         public void Dispose()
         {
@@ -153,14 +152,7 @@ namespace GenevaEtwPOC
             Console.WriteLine(sbRecord.ToString());
 
             // Create SLO record for latency of files transferred
-            var ts = DateTime.UtcNow - lastRxKqlEventTime;
-            sloMetricsManager.InsertEtwEventToGeneva((ulong) ts.TotalMilliseconds,
-                $"{Environment.MachineName}:GenevaEtwPOC", eventJson);
-
-            sloMetricsManager.InsertEtwEventDestinationBytes($"{Environment.MachineName}:GenevaEtwPOC", output);
-            sloMetricsManager.InsertEtwEventTcpNetwork($"{Environment.MachineName}:GenevaEtwPOC", output);
-
-            lastRxKqlEventTime = DateTime.UtcNow;
+            syntheticCounterManager.InsertEtwEventTcpNetwork($"{Environment.MachineName}:GenevaEtwPOC", output);
         }
 
         private void EtwProviderSession(string sessionName, Guid providerId, bool startSession)
