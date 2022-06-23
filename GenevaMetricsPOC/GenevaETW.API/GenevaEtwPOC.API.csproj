@@ -27,7 +27,7 @@
     <PackageReference Include="Microsoft.Cloud.InstrumentationFramework.Metrics.NetStd" Version="1.2.1011530001" />
     <PackageReference Include="Microsoft.Cloud.InstrumentationFramework.NetStd" Version="1.2.1011530001" />
     <PackageReference Include="Microsoft.Cloud.InstrumentationFramework.Metrics.Extensions" Version="2.2020.413.1134" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Rx.Kql" Version="3.2.2" />
     <PackageReference Include="System.Diagnostics.EventLog" Version="4.7.0" />
   </ItemGroup>
